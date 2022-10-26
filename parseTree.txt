@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isOperator(string s)
+{
+    if (s == "=" || s == "+" || s == "-" || s == "*" || s == "/" || s == "%")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int main()
+{
+    vector<string> tokens;
+    string str = "id = a + b * 20", left, right, root;
+
+    stringstream ss(str);
+
+    while (ss.good())
+    {
+        string substr;
+        getline(ss, substr, ' ');
+        tokens.push_back(substr);
+    }
+
+    for (int i = 0; i < tokens.size(); i++)
+    {
+        if (isOperator(tokens[i]))
+        {
+            root = tokens[i];
+            left = tokens[i - 1];
+            right = i + 2 >= tokens.size() ? tokens[i + 1] : tokens[i + 2];
+
+            cout << "root  : " << root << endl;
+            cout << "left  : " << left << endl;
+            cout << "right : " << right << endl;
+            cout << "-----------------" << endl;
+        }
+        else
+        {
+            if (i == 0)
+            {
+                left = tokens[i];
+            }
+            else
+            {
+                left = tokens[i - 1];
+            }
+        }
+    }
+}

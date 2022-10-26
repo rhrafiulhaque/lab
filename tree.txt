@@ -1,0 +1,45 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool isOperator(char s){
+
+if(s=='=' || s=='+'||s=='-' || s=='*'||s=='/' || s=='%'){
+    return true;
+}
+else{return false;}
+}
+
+
+
+
+int main(){
+    string eq,left;
+    cout<<"Enter equation :";
+    cin>>eq;
+
+    for(int i=0;i<eq.size();i++){
+
+       if(isOperator(eq.at(i))){
+        cout<<"root --"<<eq.at(i)<<endl;
+        cout<<"left --"<<left<<endl;
+        left="";
+        if(i+2==eq.size()){
+            cout<<"Right --"<<eq.at(i+1)<<endl;
+        }
+
+         for(int j=i+1;j<eq.size();j++){
+             if(isOperator(eq.at(j))){
+                cout<<"Right --"<<eq.at(j)<<endl;
+                break;
+             }
+         }
+
+       }
+       else{
+        left.push_back(eq.at(i));
+       }
+
+    }
+
+}

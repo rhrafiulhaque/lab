@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isKeyword(string s)
+{
+    if (s == "auto" || s == "break" || s == "case" || s == "char" || s == "const" || s == "continue" || s == "default" || s == "do" || s == "double" || s == "else" || s == "enum" || s == "extern" || s == "float" || s == "for" || s == "goto" || s == "sizeof" || s == "static" || s == "struct" || s == "switch" || s == "typedef" || s == "union" || s == "unsigned" || s == "void" || s == "volatile" || s == "while" || s == "if" || s == "int" || s == "long" || s == "register" || s == "return" || s == "short" || s == "signed")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool isOperator(string s)
+{
+    if (s == "=" || s == "+" || s == "-" || s == "*" || s == "/" || s == "%")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool isNumber(string s)
+{
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (isdigit(s[i]) == false)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    vector<string> tokens;
+    //string str = "int c = a + b * 5";
+    string str;
+    getline(cin,str);
+
+    stringstream ss(str);
+
+    while (ss.good())
+    {
+        string substr;
+        getline(ss, substr, ' ');
+        tokens.push_back(substr);
+    }
+
+    for (int i = 0; i < tokens.size(); i++)
+    {
+        if (isKeyword(tokens[i]))
+        {
+            cout << tokens[i] << " : is a keyword" << endl;
+        }
+        else if (isOperator(tokens[i]))
+        {
+            cout << tokens[i] << " : is an operator" << endl;
+        }
+        else if (isNumber(tokens[i]))
+        {
+            cout << tokens[i] << " : is a number" << endl;
+        }
+        else
+        {
+            cout << tokens[i] << " : is an identifier" << endl;
+        }
+    }
+}
